@@ -7,10 +7,17 @@ namespace ClassProyecto
     {
 
         private readonly LoginController loginController;
+        private UserHandler userHandler;
+
         public LoginView(LoginController loginController)
         {
             InitializeComponent();
             this.loginController = loginController;
+        }
+
+        public LoginView(UserHandler userHandler)
+        {
+            this.userHandler = userHandler;
         }
 
         private bool ValidateArgs(string userName, string password)
@@ -35,7 +42,7 @@ namespace ClassProyecto
             if (loginValidation)
             {
                 MessageBox.Show($"Login Successful! Welcome {userName}!");
-                var formMainView = new LoginView(this.loginController);
+                var formMainView = new LoginView(this.loginController.UserHandler);
                 formMainView.Show();
                 return true;
             }
