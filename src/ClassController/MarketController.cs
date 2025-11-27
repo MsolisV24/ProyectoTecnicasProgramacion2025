@@ -6,7 +6,7 @@ namespace ClassController
     {
         private readonly IDataLoader _loader;
 
-        public List<Customer> Users { get; private set; } = new();
+        public List<Customer> Username { get; private set; } = new();
         public List<Producer> Producers { get; private set; } = new();
         public List<Fair> Fairs { get; private set; } = new();
         public List<Product> Products { get; private set; } = new();
@@ -29,7 +29,7 @@ namespace ClassController
             string inventoryCsv,
             string expensesCsv)
         {
-            Users = _loader.LoadCsv<Customer>(usersCsv);
+            Username = _loader.LoadCsv<Customer>(usersCsv);
             Producers = _loader.LoadCsv<Producer>(producersCsv);
             Fairs = _loader.LoadCsv<Fair>(fairsCsv);
             Products = _loader.LoadCsv<Product>(productsCsv);

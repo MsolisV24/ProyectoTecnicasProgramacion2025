@@ -8,7 +8,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Customer"/> class.
         /// </summary>
-        internal Customer()
+        public Customer()
         {
         }
 
@@ -26,7 +26,7 @@
             this.LastName = lastName;
             this.Username = username;
             this.Password = password;
-            this.Directions = new List<Direction>();
+            this.Directions = directions;
             this.CreateDirectionsFromStringArray(directions);
         }
 
@@ -68,7 +68,7 @@
         /// <value>
         /// The directions.
         /// </value>
-        public List<Direction> Directions { get; set; } = new List<Direction>();
+        public string Directions { get; set; } = "[]";
 
         /// <summary>
         /// Converts to string.
@@ -76,6 +76,8 @@
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
+
+
         public override string ToString()
         {
             return $"{this.Name},{this.LastName},{this.Username},{this.Password},[]{Environment.NewLine}";

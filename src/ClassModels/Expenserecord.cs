@@ -3,7 +3,7 @@
     public class ExpenseRecord
     {
         public int Id { get; set; }
-        public int Username { get; set; }
+        public string Username { get; set; }
         public int ProducerId { get; set; }
         public int ProductId { get; set; }
         public int FairId { get; set; }

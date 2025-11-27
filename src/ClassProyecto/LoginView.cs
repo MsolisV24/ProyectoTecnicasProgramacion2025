@@ -1,5 +1,6 @@
 using ClassController;
 using ClassController.Abstractions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ClassProyecto
 {
@@ -8,6 +9,7 @@ namespace ClassProyecto
 
         private readonly LoginController loginController;
         private UserHandler userHandler;
+        private MarketController _market;
 
         public LoginView(LoginController loginController)
         {
@@ -69,6 +71,10 @@ namespace ClassProyecto
             {
                 MessageBox.Show("Please enter valid values.");
             }
+            var form = new FormMain(userName);
+            form.Show();
+            this.Hide();
+
         }
 
         private void LoginView_Load(object sender, EventArgs e)
