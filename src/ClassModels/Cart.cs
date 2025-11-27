@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ClassModels
+﻿namespace ClassModels
 {
     public class Cart
     {

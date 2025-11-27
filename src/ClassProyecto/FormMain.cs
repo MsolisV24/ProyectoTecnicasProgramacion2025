@@ -9,18 +9,25 @@ namespace ClassProyecto
 {
     public partial class FormMain : Form
     {
+        private string _username;
         private MarketController _market;
         private ICartService _cart;
         private IStatisticsService _stats;
+        private bool _datosCargados = false;
 
-        public FormMain()
+        public FormMain(string username)
         {
             InitializeComponent();
+            _username = username;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            _market = new MarketController();
+            cmbUsuarios.DataSource = null;
+            cmbUsuarios.Items.Clear();
+            cmbUsuarios.Items.Add(_username);
+            cmbUsuarios.SelectedIndex = 0;
+            cmbUsuarios.Enabled = false;
         }
 
         private void btnCargarDatos_Click(object sender, EventArgs e)
@@ -29,6 +36,7 @@ namespace ClassProyecto
             {
                 var basePath = AppDomain.CurrentDomain.BaseDirectory;
 
+                _market = new MarketController();
                 _market.LoadCsvFiles(
                     Path.Combine(basePath, "users.csv"),
                     Path.Combine(basePath, "producers.csv"),
@@ -41,15 +49,16 @@ namespace ClassProyecto
                 _cart = _market.Cart();
                 _stats = _market.Statistics();
 
-                cmbUsuarios.DataSource = _market.Users;
-                cmbUsuarios.DisplayMember = "Name";
-                cmbUsuarios.ValueMember = "Username";
-
                 cmbFerias.DataSource = _market.Fairs;
                 cmbFerias.DisplayMember = "Name";
                 cmbFerias.ValueMember = "Id";
 
-                MessageBox.Show("Datos cargados desde CSV.");
+                if (cmbFerias.Items.Count > 0)
+                    cmbFerias.SelectedIndex = 0;
+
+                _datosCargados = true;
+
+                MessageBox.Show("Datos cargados correctamente.");
             }
             catch (Exception ex)
             {
@@ -59,30 +68,34 @@ namespace ClassProyecto
 
         private void btnSetUsuarioFeria_Click(object sender, EventArgs e)
         {
-            if (cmbUsuarios.SelectedValue == null || cmbFerias.SelectedValue == null)
+            if (!_datosCargados)
             {
-                MessageBox.Show("Seleccione usuario y feria.");
+                MessageBox.Show("Cargue los datos antes de continuar.");
                 return;
             }
 
-            string username = cmbUsuarios.SelectedValue.ToString();
-            int feriaId = (int)cmbFerias.SelectedValue;
+            if (cmbFerias.SelectedValue == null)
+            {
+                MessageBox.Show("Debe seleccionar una feria.");
+                return;
+            }
 
-            _cart.SetCurrentUserAndFair(username, feriaId);
+            int feriaId = Convert.ToInt32(cmbFerias.SelectedValue);
+            _cart.SetCurrentUserAndFair(_username, feriaId);
             RefrescarCarrito();
         }
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            if (_cart == null)
+            if (!_datosCargados)
             {
-                MessageBox.Show("Debe cargar datos primero.");
+                MessageBox.Show("Cargue los datos antes de continuar.");
                 return;
             }
 
-            int feriaSeleccionada = (int)cmbFerias.SelectedValue;
+            int feriaId = Convert.ToInt32(cmbFerias.SelectedValue);
 
-            var form = new FormAgregarProducto(_market.Products, feriaSeleccionada);
+            var form = new FormAgregarProducto(_market.Products, feriaId);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -99,6 +112,12 @@ namespace ClassProyecto
 
         private void btnEliminarItem_Click(object sender, EventArgs e)
         {
+            if (!_datosCargados)
+            {
+                MessageBox.Show("Cargue los datos antes de continuar.");
+                return;
+            }
+
             if (dgvCarrito.CurrentRow == null) return;
 
             if (dgvCarrito.CurrentRow.DataBoundItem is CartItem item)
@@ -110,12 +129,24 @@ namespace ClassProyecto
 
         private void btnLimpiarCarrito_Click(object sender, EventArgs e)
         {
+            if (!_datosCargados)
+            {
+                MessageBox.Show("Cargue los datos antes de continuar.");
+                return;
+            }
+
             _cart.ClearCart();
             RefrescarCarrito();
         }
 
         private void btnProcesarCompra_Click(object sender, EventArgs e)
         {
+            if (!_datosCargados)
+            {
+                MessageBox.Show("Cargue los datos antes de continuar.");
+                return;
+            }
+
             try
             {
                 var lista = _cart.Checkout();
@@ -130,9 +161,9 @@ namespace ClassProyecto
 
         private void btnVerEstadisticas_Click(object sender, EventArgs e)
         {
-            if (_stats == null)
+            if (!_datosCargados)
             {
-                MessageBox.Show("Cargue datos primero.");
+                MessageBox.Show("Cargue los datos antes de continuar.");
                 return;
             }
 
@@ -147,5 +178,7 @@ namespace ClassProyecto
         }
     }
 }
+
+
 
 
