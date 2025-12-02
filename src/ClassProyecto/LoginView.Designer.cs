@@ -38,9 +38,9 @@
             // 
             // btn_Login
             // 
-            btn_Login.Location = new Point(245, 307);
+            btn_Login.Location = new Point(138, 260);
             btn_Login.Name = "btn_Login";
-            btn_Login.Size = new Size(75, 23);
+            btn_Login.Size = new Size(141, 77);
             btn_Login.TabIndex = 0;
             btn_Login.Text = "Login";
             btn_Login.UseVisualStyleBackColor = true;
@@ -48,9 +48,9 @@
             // 
             // btn_RegisterUser
             // 
-            btn_RegisterUser.Location = new Point(422, 314);
+            btn_RegisterUser.Location = new Point(336, 260);
             btn_RegisterUser.Name = "btn_RegisterUser";
-            btn_RegisterUser.Size = new Size(75, 23);
+            btn_RegisterUser.Size = new Size(141, 77);
             btn_RegisterUser.TabIndex = 1;
             btn_RegisterUser.Text = "Register User";
             btn_RegisterUser.UseVisualStyleBackColor = true;
@@ -58,7 +58,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(78, 38);
+            label1.Location = new Point(81, 55);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
             label1.TabIndex = 2;
@@ -67,7 +67,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(84, 108);
+            label2.Location = new Point(81, 104);
             label2.Name = "label2";
             label2.Size = new Size(57, 15);
             label2.TabIndex = 3;
@@ -75,16 +75,16 @@
             // 
             // txt_UserName
             // 
-            txt_UserName.Location = new Point(263, 52);
+            txt_UserName.Location = new Point(245, 55);
             txt_UserName.Name = "txt_UserName";
-            txt_UserName.Size = new Size(100, 23);
+            txt_UserName.Size = new Size(142, 23);
             txt_UserName.TabIndex = 4;
             // 
             // txt_Password
             // 
-            txt_Password.Location = new Point(267, 101);
+            txt_Password.Location = new Point(245, 101);
             txt_Password.Name = "txt_Password";
-            txt_Password.Size = new Size(100, 23);
+            txt_Password.Size = new Size(142, 23);
             txt_Password.TabIndex = 5;
             // 
             // LoginView

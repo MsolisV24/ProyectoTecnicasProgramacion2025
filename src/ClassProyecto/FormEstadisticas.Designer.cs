@@ -65,7 +65,7 @@
             // 
             // dtpDesde
             // 
-            dtpDesde.Location = new Point(89, 27);
+            dtpDesde.Location = new Point(80, 27);
             dtpDesde.Name = "dtpDesde";
             dtpDesde.Size = new Size(200, 23);
             dtpDesde.TabIndex = 6;

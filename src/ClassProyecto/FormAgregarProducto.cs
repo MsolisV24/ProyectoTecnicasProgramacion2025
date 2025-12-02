@@ -53,6 +53,8 @@ namespace ClassProyecto
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿using System.Linq;
 
 namespace ClassController
 {
@@ -12,23 +12,39 @@ namespace ClassController
                 return list;
 
             var lines = File.ReadAllLines(path);
-            if (lines.Length <= 1)
-                return list;
 
-            var headers = lines[0].Split(',');
-
-            for (int i = 1; i < lines.Length; i++)
+            foreach (var line in lines)
             {
-                var parts = lines[i].Split(',');
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                if (line.Contains("..."))
+                    continue;
+
+                var parts = line.Split(',');
+
+                if (typeof(T) == typeof(ClassModels.Customer) && parts.Length > 4)
+                    parts = parts.Take(4).ToArray();
 
                 var obj = Activator.CreateInstance<T>();
                 var props = typeof(T).GetProperties();
 
-                for (int c = 0; c < parts.Length && c < props.Length; c++)
+                for (int c = 0; c < props.Length && c < parts.Length; c++)
                 {
                     var prop = props[c];
-                    object? value = Convert.ChangeType(parts[c], prop.PropertyType);
-                    prop.SetValue(obj, value);
+
+                    if (string.IsNullOrWhiteSpace(parts[c]))
+                        continue;
+
+                    try
+                    {
+                        object? value = Convert.ChangeType(parts[c], prop.PropertyType);
+                        prop.SetValue(obj, value);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
                 }
 
                 list.Add(obj);
@@ -38,4 +54,5 @@ namespace ClassController
         }
     }
 }
+
 

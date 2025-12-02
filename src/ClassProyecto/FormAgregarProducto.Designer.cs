@@ -57,13 +57,13 @@
             // 
             lblUnidad.Location = new Point(180, 100);
             lblUnidad.Name = "lblUnidad";
-            lblUnidad.Size = new Size(100, 23);
+            lblUnidad.Size = new Size(83, 23);
             lblUnidad.TabIndex = 7;
             lblUnidad.Text = "-";
             // 
             // lblPrecio
             // 
-            lblPrecio.Location = new Point(100, 140);
+            lblPrecio.Location = new Point(140, 140);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(100, 23);
             lblPrecio.TabIndex = 6;
