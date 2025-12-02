@@ -45,13 +45,24 @@ namespace ClassProyecto
                     Path.Combine(basePath, "inventory.csv"),
                     Path.Combine(basePath, "expenses.csv")
                 );
+                var fairsPath = Path.Combine(basePath, "fairs.csv");
+                MessageBox.Show("Ruta: " + fairsPath + "\nExiste: " + File.Exists(fairsPath));
+
+                var lines = File.ReadAllLines(fairsPath);
+                MessageBox.Show("Líneas leídas: " + lines.Length);
+
+                if (lines.Length > 0)
+                {
+                    MessageBox.Show("Primera línea: " + lines[0]);
+                }
 
                 _cart = _market.Cart();
                 _stats = _market.Statistics();
 
-                cmbFerias.DataSource = _market.Fairs;
                 cmbFerias.DisplayMember = "Name";
                 cmbFerias.ValueMember = "Id";
+                cmbFerias.DataSource = _market.Fairs;
+
 
                 if (cmbFerias.Items.Count > 0)
                     cmbFerias.SelectedIndex = 0;

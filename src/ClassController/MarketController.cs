@@ -38,6 +38,7 @@ namespace ClassController
 
             _cart = new CartService(Products, Inventory, ExpenseHistory);
             _stats = new StatisticsService(ExpenseHistory, Producers, Products);
+
         }
 
         public ICartService Cart() => _cart;
