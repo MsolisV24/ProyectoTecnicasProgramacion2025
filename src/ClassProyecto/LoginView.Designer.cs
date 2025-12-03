@@ -54,6 +54,7 @@
             btn_RegisterUser.TabIndex = 1;
             btn_RegisterUser.Text = "Register User";
             btn_RegisterUser.UseVisualStyleBackColor = true;
+            btn_RegisterUser.Click += btn_RegisterUser_Click;
             // 
             // label1
             // 

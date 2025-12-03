@@ -19,6 +19,10 @@ namespace ClassProyecto
             Application.Run(new LoginView(userController));
         }
 
+        /// <summary>
+        /// Loads the controller service.
+        /// </summary>
+        /// <returns></returns>
         private static LoginController LoadControllerService()
         {
             var userHandler = new UserHandler(new FileHandler<Customer>());
