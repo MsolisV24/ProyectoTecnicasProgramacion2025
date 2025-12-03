@@ -1,15 +1,11 @@
 using ClassController;
-using ClassController.Abstractions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Microsoft.Win32;
 
 namespace ClassProyecto
 {
     public partial class LoginView : Form
     {
-
         private readonly LoginController loginController;
-        private UserHandler userHandler;
-        private MarketController _market;
 
         public LoginView(LoginController loginController)
         {
@@ -17,69 +13,69 @@ namespace ClassProyecto
             this.loginController = loginController;
         }
 
-        public LoginView(UserHandler userHandler)
-        {
-            this.userHandler = userHandler;
-        }
-
         private bool ValidateArgs(string userName, string password)
         {
-            if (!userName.IsValidadString())
+            if (string.IsNullOrWhiteSpace(userName))
             {
                 MessageBox.Show("The UserName cannot be empty");
-                this.txt_Password.Clear();
+                txt_Password.Clear();
+                return false;
             }
-            else if (!password.IsValidadString())
+
+            if (string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("The Password cannot be empty");
-                this.txt_Password.Clear();
+                txt_Password.Clear();
+                return false;
             }
+
             return true;
         }
 
         private bool Login(string userName, string password)
         {
-            var loginValidation = this.loginController.Login(userName, password);
+            var loginValidation = loginController.Login(userName, password);
 
             if (loginValidation)
             {
                 MessageBox.Show($"Login Successful! Welcome {userName}!");
-                var formMainView = new LoginView(this.loginController.UserHandler);
-                formMainView.Show();
                 return true;
             }
 
-            return loginValidation;
+            return false;
         }
 
         private void btn_Login_Click(object sender, EventArgs e)
         {
             var userName = txt_UserName.Text;
             var password = txt_Password.Text;
-            var isUserValid = ValidateArgs(userName, password);
 
-            if (isUserValid)
+            if (!ValidateArgs(userName, password))
+                return;
+
+            var loginSuccess = Login(userName, password);
+
+            if (!loginSuccess)
             {
-                var loginSuccess = Login(userName, password);
-                if (!loginSuccess)
-                {
-                    MessageBox.Show("UserName or Password incorrect");
-                    this.txt_Password.Clear();
-                }
+                MessageBox.Show("UserName or Password incorrect");
+                txt_Password.Clear();
+                return;
             }
-            else
-            {
-                MessageBox.Show("Please enter valid values.");
-            }
-            var form = new FormMain(userName);
-            form.Show();
+            var carrito = new FormMain(userName);
+            carrito.Show();
             this.Hide();
-
         }
 
         private void LoginView_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void btn_RegisterUser_Click(object sender, EventArgs e)
+        {
+            var view = new RegisterView(loginController.UserHandler);
+            view.ShowDialog();
+        }
     }
 }
+

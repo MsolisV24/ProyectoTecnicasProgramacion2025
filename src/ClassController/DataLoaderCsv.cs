@@ -1,9 +1,17 @@
-﻿using System.Linq;
-
-namespace ClassController
+﻿namespace ClassController
 {
+    /// <summary>
+    /// implements a CSV data loader.
+    /// </summary>
+    /// <seealso cref="ClassController.IDataLoader" />
     public class DataLoaderCsv : IDataLoader
     {
+        /// <summary>
+        /// Loads the CSV.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
         public List<T> LoadCsv<T>(string path)
         {
             var list = new List<T>();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using ClassController;
+﻿using ClassController;
 using ClassModels;
 
 namespace ClassProyecto
@@ -13,7 +9,7 @@ namespace ClassProyecto
         private MarketController _market;
         private ICartService _cart;
         private IStatisticsService _stats;
-        private bool _datosCargados = false;
+        private bool _dataLoaded = false;
 
         public FormMain(string username)
         {
@@ -23,14 +19,14 @@ namespace ClassProyecto
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            cmbUsuarios.DataSource = null;
-            cmbUsuarios.Items.Clear();
-            cmbUsuarios.Items.Add(_username);
-            cmbUsuarios.SelectedIndex = 0;
-            cmbUsuarios.Enabled = false;
+            cmbUsers.DataSource = null;
+            cmbUsers.Items.Clear();
+            cmbUsers.Items.Add(_username);
+            cmbUsers.SelectedIndex = 0;
+            cmbUsers.Enabled = false;
         }
 
-        private void btnCargarDatos_Click(object sender, EventArgs e)
+        private void btnLoadData_Click(object sender, EventArgs e)
         {
             try
             {
@@ -45,65 +41,63 @@ namespace ClassProyecto
                     Path.Combine(basePath, "inventory.csv"),
                     Path.Combine(basePath, "expenses.csv")
                 );
-                
 
                 _cart = _market.Cart();
                 _stats = _market.Statistics();
 
-                cmbFerias.DisplayMember = "Name";
-                cmbFerias.ValueMember = "Id";
-                cmbFerias.DataSource = _market.Fairs;
+                cmbFairs.DisplayMember = "Name";
+                cmbFairs.ValueMember = "Id";
+                cmbFairs.DataSource = _market.Fairs;
 
+                if (cmbFairs.Items.Count > 0)
+                    cmbFairs.SelectedIndex = 0;
 
-                if (cmbFerias.Items.Count > 0)
-                    cmbFerias.SelectedIndex = 0;
+                _dataLoaded = true;
 
-                _datosCargados = true;
-
-                MessageBox.Show("Datos cargados correctamente.");
+                MessageBox.Show("Data loaded successfully.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar datos: " + ex.Message);
+                MessageBox.Show("Error loading data: " + ex.Message);
             }
         }
 
-        private void btnSetUsuarioFeria_Click(object sender, EventArgs e)
+        private void btnSetUserFair_Click(object sender, EventArgs e)
         {
-            if (!_datosCargados)
+            if (!_dataLoaded)
             {
-                MessageBox.Show("Cargue los datos antes de continuar.");
+                MessageBox.Show("Load data before continuing.");
                 return;
             }
 
-            if (cmbFerias.SelectedValue == null)
+            if (cmbFairs.SelectedValue == null)
             {
-                MessageBox.Show("Debe seleccionar una feria.");
+                MessageBox.Show("Select a fair first.");
                 return;
             }
 
-            int feriaId = Convert.ToInt32(cmbFerias.SelectedValue);
-            _cart.SetCurrentUserAndFair(_username, feriaId);
-            RefrescarCarrito();
+            int fairId = Convert.ToInt32(cmbFairs.SelectedValue);
+            _cart.SetCurrentUserAndFair(_username, fairId);
+            RefreshCart();
         }
 
-        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            if (!_datosCargados)
+            if (!_dataLoaded)
             {
-                MessageBox.Show("Cargue los datos antes de continuar.");
+                MessageBox.Show("Load data before continuing.");
                 return;
             }
 
-            int feriaId = Convert.ToInt32(cmbFerias.SelectedValue);
+            int fairId = Convert.ToInt32(cmbFairs.SelectedValue);
 
-            var form = new FormAgregarProducto(_market.Products, feriaId);
+            var form = new FormAddProduct(_market.Products, fairId);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     _cart.AddItem(form.SelectedProduct.Id, form.SelectedQuantity);
-                    RefrescarCarrito();
+                    RefreshCart();
                 }
                 catch (Exception ex)
                 {
@@ -112,74 +106,75 @@ namespace ClassProyecto
             }
         }
 
-        private void btnEliminarItem_Click(object sender, EventArgs e)
+        private void btnRemoveItem_Click(object sender, EventArgs e)
         {
-            if (!_datosCargados)
+            if (!_dataLoaded)
             {
-                MessageBox.Show("Cargue los datos antes de continuar.");
+                MessageBox.Show("Load data before continuing.");
                 return;
             }
 
-            if (dgvCarrito.CurrentRow == null) return;
+            if (dgvCart.CurrentRow == null) return;
 
-            if (dgvCarrito.CurrentRow.DataBoundItem is CartItem item)
+            if (dgvCart.CurrentRow.DataBoundItem is CartItem item)
             {
                 _cart.RemoveItem(item.ProductId);
-                RefrescarCarrito();
+                RefreshCart();
             }
         }
 
-        private void btnLimpiarCarrito_Click(object sender, EventArgs e)
+        private void btnClearCart_Click(object sender, EventArgs e)
         {
-            if (!_datosCargados)
+            if (!_dataLoaded)
             {
-                MessageBox.Show("Cargue los datos antes de continuar.");
+                MessageBox.Show("Load data before continuing.");
                 return;
             }
 
             _cart.ClearCart();
-            RefrescarCarrito();
+            RefreshCart();
         }
 
-        private void btnProcesarCompra_Click(object sender, EventArgs e)
+        private void btnCheckout_Click(object sender, EventArgs e)
         {
-            if (!_datosCargados)
+            if (!_dataLoaded)
             {
-                MessageBox.Show("Cargue los datos antes de continuar.");
+                MessageBox.Show("Load data before continuing.");
                 return;
             }
 
             try
             {
-                var lista = _cart.Checkout();
-                RefrescarCarrito();
-                MessageBox.Show("Compra procesada. Registros creados: " + lista.Count);
+                var list = _cart.Checkout();
+                RefreshCart();
+                MessageBox.Show("Purchase processed. Records created: " + list.Count);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al procesar: " + ex.Message);
+                MessageBox.Show("Error processing purchase: " + ex.Message);
             }
         }
 
-        private void btnVerEstadisticas_Click(object sender, EventArgs e)
+        private void btnViewStats_Click(object sender, EventArgs e)
         {
-            if (!_datosCargados)
+            if (!_dataLoaded)
             {
-                MessageBox.Show("Cargue los datos antes de continuar.");
+                MessageBox.Show("Load data before continuing.");
                 return;
             }
 
-            new FormEstadisticas(_stats).ShowDialog();
+            new FormStatistics(_stats).ShowDialog();
         }
 
-        private void RefrescarCarrito()
+        private void RefreshCart()
         {
-            dgvCarrito.DataSource = null;
-            dgvCarrito.DataSource = _cart.GetCurrentCart().Items.ToList();
+            dgvCart.DataSource = null;
+            dgvCart.DataSource = _cart.GetCurrentCart().Items.ToList();
             lblTotal.Text = _cart.GetCurrentCart().Total.ToString("N2");
         }
     }
 }
+
 
 
 
