@@ -87,12 +87,17 @@ namespace ClassProyecto
             File.AppendAllLines(route, [line]);
         }
 
+        private void RegisterView_Load(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// Handles the Load event of the RegisterView control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        
+
     }
 }
 

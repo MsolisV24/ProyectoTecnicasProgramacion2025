@@ -34,71 +34,92 @@
             lblFromText = new Label();
             lblToText = new Label();
             lblBestMonthText = new Label();
-
             ((System.ComponentModel.ISupportInitialize)dgvProducers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvMonths).BeginInit();
             SuspendLayout();
-
+            // 
+            // dgvProducers
+            // 
             dgvProducers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProducers.Location = new Point(25, 80);
             dgvProducers.Name = "dgvProducers";
             dgvProducers.Size = new Size(340, 150);
             dgvProducers.TabIndex = 9;
-
+            // 
+            // dgvProducts
+            // 
             dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProducts.Location = new Point(400, 80);
             dgvProducts.Name = "dgvProducts";
             dgvProducts.Size = new Size(340, 150);
             dgvProducts.TabIndex = 8;
-
+            // 
+            // dgvMonths
+            // 
             dgvMonths.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMonths.Location = new Point(25, 260);
             dgvMonths.Name = "dgvMonths";
             dgvMonths.Size = new Size(715, 150);
             dgvMonths.TabIndex = 7;
-
-            dtpFrom.Location = new Point(80, 27);
+            // 
+            // dtpFrom
+            // 
+            dtpFrom.Location = new Point(98, 25);
             dtpFrom.Name = "dtpFrom";
-            dtpFrom.Size = new Size(200, 23);
+            dtpFrom.Size = new Size(212, 23);
             dtpFrom.TabIndex = 6;
-
-            dtpTo.Location = new Point(339, 27);
+            // 
+            // dtpTo
+            // 
+            dtpTo.Location = new Point(371, 25);
             dtpTo.Name = "dtpTo";
-            dtpTo.Size = new Size(200, 23);
+            dtpTo.Size = new Size(210, 23);
             dtpTo.TabIndex = 5;
-
-            btnApplyFilter.Location = new Point(560, 25);
+            // 
+            // btnApplyFilter
+            // 
+            btnApplyFilter.Location = new Point(600, 25);
             btnApplyFilter.Name = "btnApplyFilter";
             btnApplyFilter.Size = new Size(100, 23);
             btnApplyFilter.TabIndex = 2;
             btnApplyFilter.Text = "Apply filter";
             btnApplyFilter.Click += btnApplyFilter_Click;
-
+            // 
+            // lblBestMonth
+            // 
             lblBestMonth.Location = new Point(160, 430);
             lblBestMonth.Name = "lblBestMonth";
             lblBestMonth.Size = new Size(150, 23);
             lblBestMonth.TabIndex = 1;
             lblBestMonth.Text = "No data";
-
-            lblFromText.Location = new Point(25, 27);
+            // 
+            // lblFromText
+            // 
+            lblFromText.Location = new Point(25, 25);
             lblFromText.Name = "lblFromText";
             lblFromText.Size = new Size(58, 23);
             lblFromText.TabIndex = 4;
             lblFromText.Text = "From:";
-
-            lblToText.Location = new Point(286, 29);
+            // 
+            // lblToText
+            // 
+            lblToText.Location = new Point(318, 27);
             lblToText.Name = "lblToText";
             lblToText.Size = new Size(47, 23);
             lblToText.TabIndex = 3;
             lblToText.Text = "To:";
-
-            lblBestMonthText.Location = new Point(25, 430);
+            // 
+            // lblBestMonthText
+            // 
+            lblBestMonthText.Location = new Point(12, 430);
             lblBestMonthText.Name = "lblBestMonthText";
             lblBestMonthText.Size = new Size(150, 23);
             lblBestMonthText.TabIndex = 0;
             lblBestMonthText.Text = "Highest consumption:";
-
+            // 
+            // FormStatistics
+            // 
             ClientSize = new Size(780, 470);
             Controls.Add(lblBestMonthText);
             Controls.Add(lblBestMonth);

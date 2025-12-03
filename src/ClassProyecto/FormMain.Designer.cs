@@ -28,113 +28,179 @@
 
         private void InitializeComponent()
         {
-            this.cmbUsers = new System.Windows.Forms.ComboBox();
-            this.cmbFairs = new System.Windows.Forms.ComboBox();
-            this.btnLoadData = new System.Windows.Forms.Button();
-            this.btnSetUserFair = new System.Windows.Forms.Button();
-            this.dgvCart = new System.Windows.Forms.DataGridView();
-            this.btnAddProduct = new System.Windows.Forms.Button();
-            this.btnRemoveItem = new System.Windows.Forms.Button();
-            this.btnClearCart = new System.Windows.Forms.Button();
-            this.btnCheckout = new System.Windows.Forms.Button();
-            this.btnViewStats = new System.Windows.Forms.Button();
-            this.lblUser = new System.Windows.Forms.Label();
-            this.lblFair = new System.Windows.Forms.Label();
-            this.lblTotalText = new System.Windows.Forms.Label();
-            this.lblTotal = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
-            this.SuspendLayout();
-
-            this.cmbUsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUsers.Location = new System.Drawing.Point(25, 45);
-            this.cmbUsers.Name = "cmbUsers";
-            this.cmbUsers.Size = new System.Drawing.Size(190, 23);
-
-            this.cmbFairs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFairs.Location = new System.Drawing.Point(240, 45);
-            this.cmbFairs.Name = "cmbFairs";
-            this.cmbFairs.Size = new System.Drawing.Size(190, 23);
-
-            this.btnLoadData.Location = new System.Drawing.Point(450, 20);
-            this.btnLoadData.Name = "btnLoadData";
-            this.btnLoadData.Size = new System.Drawing.Size(120, 30);
-            this.btnLoadData.Text = "Load CSV";
-            this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click);
-
-            this.btnSetUserFair.Location = new System.Drawing.Point(450, 60);
-            this.btnSetUserFair.Name = "btnSetUserFair";
-            this.btnSetUserFair.Size = new System.Drawing.Size(120, 30);
-            this.btnSetUserFair.Text = "Apply selection";
-            this.btnSetUserFair.Click += new System.EventHandler(this.btnSetUserFair_Click);
-
-            this.dgvCart.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCart.Location = new System.Drawing.Point(25, 100);
-            this.dgvCart.ReadOnly = true;
-            this.dgvCart.Size = new System.Drawing.Size(545, 220);
-
-            this.btnAddProduct.Location = new System.Drawing.Point(25, 340);
-            this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(120, 30);
-            this.btnAddProduct.Text = "Add product";
-            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
-
-            this.btnRemoveItem.Location = new System.Drawing.Point(160, 340);
-            this.btnRemoveItem.Name = "btnRemoveItem";
-            this.btnRemoveItem.Size = new System.Drawing.Size(120, 30);
-            this.btnRemoveItem.Text = "Remove item";
-            this.btnRemoveItem.Click += new System.EventHandler(this.btnRemoveItem_Click);
-
-            this.btnClearCart.Location = new System.Drawing.Point(295, 340);
-            this.btnClearCart.Name = "btnClearCart";
-            this.btnClearCart.Size = new System.Drawing.Size(120, 30);
-            this.btnClearCart.Text = "Clear cart";
-            this.btnClearCart.Click += new System.EventHandler(this.btnClearCart_Click);
-
-            this.btnCheckout.Location = new System.Drawing.Point(430, 340);
-            this.btnCheckout.Name = "btnCheckout";
-            this.btnCheckout.Size = new System.Drawing.Size(120, 30);
-            this.btnCheckout.Text = "Checkout";
-            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
-
-            this.btnViewStats.Location = new System.Drawing.Point(430, 395);
-            this.btnViewStats.Name = "btnViewStats";
-            this.btnViewStats.Size = new System.Drawing.Size(120, 30);
-            this.btnViewStats.Text = "View statistics";
-            this.btnViewStats.Click += new System.EventHandler(this.btnViewStats_Click);
-
-            this.lblUser.Location = new System.Drawing.Point(25, 25);
-            this.lblUser.Text = "User:";
-
-            this.lblFair.Location = new System.Drawing.Point(240, 25);
-            this.lblFair.Text = "Fair:";
-
-            this.lblTotalText.Location = new System.Drawing.Point(25, 405);
-            this.lblTotalText.Text = "Total:";
-
-            this.lblTotal.Location = new System.Drawing.Point(80, 405);
-            this.lblTotal.Text = "0.00";
-
-            this.ClientSize = new System.Drawing.Size(600, 450);
-            this.Controls.Add(this.lblTotal);
-            this.Controls.Add(this.lblTotalText);
-            this.Controls.Add(this.btnViewStats);
-            this.Controls.Add(this.btnCheckout);
-            this.Controls.Add(this.btnClearCart);
-            this.Controls.Add(this.btnRemoveItem);
-            this.Controls.Add(this.btnAddProduct);
-            this.Controls.Add(this.dgvCart);
-            this.Controls.Add(this.btnSetUserFair);
-            this.Controls.Add(this.btnLoadData);
-            this.Controls.Add(this.cmbFairs);
-            this.Controls.Add(this.cmbUsers);
-            this.Controls.Add(this.lblUser);
-            this.Controls.Add(this.lblFair);
-            this.Text = "Shopping Cart - Farmer's Market";
-            this.Load += new System.EventHandler(this.FormMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            cmbUsers = new ComboBox();
+            cmbFairs = new ComboBox();
+            btnLoadData = new Button();
+            btnSetUserFair = new Button();
+            dgvCart = new DataGridView();
+            btnAddProduct = new Button();
+            btnRemoveItem = new Button();
+            btnClearCart = new Button();
+            btnCheckout = new Button();
+            btnViewStats = new Button();
+            lblUser = new Label();
+            lblFair = new Label();
+            lblTotalText = new Label();
+            lblTotal = new Label();
+            btnGenerateInvoice = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgvCart).BeginInit();
+            SuspendLayout();
+            // 
+            // cmbUsers
+            // 
+            cmbUsers.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbUsers.Location = new Point(25, 45);
+            cmbUsers.Name = "cmbUsers";
+            cmbUsers.Size = new Size(190, 23);
+            cmbUsers.TabIndex = 11;
+            // 
+            // cmbFairs
+            // 
+            cmbFairs.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbFairs.Location = new Point(240, 45);
+            cmbFairs.Name = "cmbFairs";
+            cmbFairs.Size = new Size(190, 23);
+            cmbFairs.TabIndex = 10;
+            // 
+            // btnLoadData
+            // 
+            btnLoadData.Location = new Point(450, 20);
+            btnLoadData.Name = "btnLoadData";
+            btnLoadData.Size = new Size(120, 30);
+            btnLoadData.TabIndex = 9;
+            btnLoadData.Text = "Load CSV";
+            btnLoadData.Click += btnLoadData_Click;
+            // 
+            // btnSetUserFair
+            // 
+            btnSetUserFair.Location = new Point(450, 60);
+            btnSetUserFair.Name = "btnSetUserFair";
+            btnSetUserFair.Size = new Size(120, 30);
+            btnSetUserFair.TabIndex = 8;
+            btnSetUserFair.Text = "Apply selection";
+            btnSetUserFair.Click += btnSetUserFair_Click;
+            // 
+            // dgvCart
+            // 
+            dgvCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCart.Location = new Point(25, 100);
+            dgvCart.Name = "dgvCart";
+            dgvCart.ReadOnly = true;
+            dgvCart.Size = new Size(545, 220);
+            dgvCart.TabIndex = 7;
+            // 
+            // btnAddProduct
+            // 
+            btnAddProduct.Location = new Point(25, 340);
+            btnAddProduct.Name = "btnAddProduct";
+            btnAddProduct.Size = new Size(120, 30);
+            btnAddProduct.TabIndex = 6;
+            btnAddProduct.Text = "Add product";
+            btnAddProduct.Click += btnAddProduct_Click;
+            // 
+            // btnRemoveItem
+            // 
+            btnRemoveItem.Location = new Point(160, 340);
+            btnRemoveItem.Name = "btnRemoveItem";
+            btnRemoveItem.Size = new Size(120, 30);
+            btnRemoveItem.TabIndex = 5;
+            btnRemoveItem.Text = "Remove item";
+            btnRemoveItem.Click += btnRemoveItem_Click;
+            // 
+            // btnClearCart
+            // 
+            btnClearCart.Location = new Point(295, 340);
+            btnClearCart.Name = "btnClearCart";
+            btnClearCart.Size = new Size(120, 30);
+            btnClearCart.TabIndex = 4;
+            btnClearCart.Text = "Clear cart";
+            btnClearCart.Click += btnClearCart_Click;
+            // 
+            // btnCheckout
+            // 
+            btnCheckout.Location = new Point(430, 340);
+            btnCheckout.Name = "btnCheckout";
+            btnCheckout.Size = new Size(120, 30);
+            btnCheckout.TabIndex = 3;
+            btnCheckout.Text = "Checkout";
+            btnCheckout.Click += btnCheckout_Click;
+            // 
+            // btnViewStats
+            // 
+            btnViewStats.Location = new Point(430, 395);
+            btnViewStats.Name = "btnViewStats";
+            btnViewStats.Size = new Size(120, 30);
+            btnViewStats.TabIndex = 2;
+            btnViewStats.Text = "View statistics";
+            btnViewStats.Click += btnViewStats_Click;
+            // 
+            // lblUser
+            // 
+            lblUser.Location = new Point(25, 25);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new Size(100, 23);
+            lblUser.TabIndex = 12;
+            lblUser.Text = "User:";
+            // 
+            // lblFair
+            // 
+            lblFair.Location = new Point(240, 25);
+            lblFair.Name = "lblFair";
+            lblFair.Size = new Size(100, 23);
+            lblFair.TabIndex = 13;
+            lblFair.Text = "Fair:";
+            // 
+            // lblTotalText
+            // 
+            lblTotalText.Location = new Point(25, 405);
+            lblTotalText.Name = "lblTotalText";
+            lblTotalText.Size = new Size(100, 23);
+            lblTotalText.TabIndex = 1;
+            lblTotalText.Text = "Total:";
+            // 
+            // lblTotal
+            // 
+            lblTotal.Location = new Point(80, 405);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(100, 23);
+            lblTotal.TabIndex = 0;
+            lblTotal.Text = "0.00";
+            // 
+            // btnGenerateInvoice
+            // 
+            btnGenerateInvoice.Location = new Point(295, 395);
+            btnGenerateInvoice.Name = "btnGenerateInvoice";
+            btnGenerateInvoice.Size = new Size(120, 30);
+            btnGenerateInvoice.TabIndex = 14;
+            btnGenerateInvoice.Text = "Generate Invoice";
+            btnGenerateInvoice.UseVisualStyleBackColor = true;
+            btnGenerateInvoice.Click += btnGenerateInvoice_Click;
+            // 
+            // FormMain
+            // 
+            ClientSize = new Size(600, 450);
+            Controls.Add(btnGenerateInvoice);
+            Controls.Add(lblTotal);
+            Controls.Add(lblTotalText);
+            Controls.Add(btnViewStats);
+            Controls.Add(btnCheckout);
+            Controls.Add(btnClearCart);
+            Controls.Add(btnRemoveItem);
+            Controls.Add(btnAddProduct);
+            Controls.Add(dgvCart);
+            Controls.Add(btnSetUserFair);
+            Controls.Add(btnLoadData);
+            Controls.Add(cmbFairs);
+            Controls.Add(cmbUsers);
+            Controls.Add(lblUser);
+            Controls.Add(lblFair);
+            Name = "FormMain";
+            Text = "Shopping Cart - Sistema Feria del Agricultor CR";
+            Load += FormMain_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvCart).EndInit();
+            ResumeLayout(false);
         }
+        private Button btnGenerateInvoice;
     }
 }
 
