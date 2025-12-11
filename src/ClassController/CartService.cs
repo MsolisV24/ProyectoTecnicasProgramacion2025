@@ -12,6 +12,7 @@ namespace ClassController
         private readonly List<InventoryItem> _inventory;
         private readonly List<ExpenseRecord> _history;
         private Cart _cart = new();
+        private List<Product> products;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CartService"/> class.
@@ -24,6 +25,11 @@ namespace ClassController
             _products = products;
             _inventory = inventory;
             _history = history;
+        }
+
+        public CartService(List<Product> products)
+        {
+            this.products = products;
         }
 
         /// <summary>

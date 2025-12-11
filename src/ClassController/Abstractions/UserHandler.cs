@@ -18,6 +18,10 @@ namespace ClassController.Abstractions
             this.dataHandler = dataHandler;
         }
 
+        public UserHandler()
+        {
+        }
+
         /// <summary>
         /// Gets or sets the costumers.
         /// </summary>
