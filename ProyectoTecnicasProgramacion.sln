@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassModels", "src\ClassMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassController", "src\ClassController\ClassController.csproj", "{901738DE-5CD7-4CFE-B5EB-58216E609C5C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassController.Test", "test\ClassController.Test\ClassController.Test.csproj", "{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{901738DE-5CD7-4CFE-B5EB-58216E609C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{901738DE-5CD7-4CFE-B5EB-58216E609C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{901738DE-5CD7-4CFE-B5EB-58216E609C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC00437D-24F5-4E06-8CC0-DBCE0917A7F3}

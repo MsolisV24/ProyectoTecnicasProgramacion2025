@@ -54,6 +54,7 @@
         /// The unit price.
         /// </value>
         public decimal UnitPrice { get; set; }
+        public decimal Price { get; set; }
     }
 }
 
