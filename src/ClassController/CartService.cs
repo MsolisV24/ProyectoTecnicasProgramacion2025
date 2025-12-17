@@ -1,48 +1,31 @@
-﻿using ClassModels;
+﻿using ClassDataAccess;
+using ClassModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassController
 {
-    /// <summary>
-    /// implements a shopping cart service for managing cart operations such as adding/removing items,
-    /// </summary>
-    /// <seealso cref="ClassController.ICartService" />
     public class CartService : ICartService
     {
         private readonly List<Product> _products;
         private readonly List<InventoryItem> _inventory;
         private readonly List<ExpenseRecord> _history;
+        private readonly DatabaseContext _context;
         private Cart _cart = new();
-        private List<Product> products;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CartService"/> class.
-        /// </summary>
-        /// <param name="products">The products.</param>
-        /// <param name="inventory">The inventory.</param>
-        /// <param name="history">The history.</param>
-        public CartService(List<Product> products, List<InventoryItem> inventory, List<ExpenseRecord> history)
+        public CartService(
+            List<Product> products,
+            List<InventoryItem> inventory,
+            List<ExpenseRecord> history,
+            DatabaseContext context)
         {
             _products = products;
             _inventory = inventory;
             _history = history;
+            _context = context;
         }
 
-        public CartService(List<Product> products)
-        {
-            this.products = products;
-        }
-
-        /// <summary>
-        /// Gets the current cart.
-        /// </summary>
-        /// <returns></returns>
         public Cart GetCurrentCart() => _cart;
 
-        /// <summary>
-        /// Sets the current user and fair.
-        /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="fairId">The fair identifier.</param>
         public void SetCurrentUserAndFair(string username, int fairId)
         {
             _cart = new Cart
@@ -52,12 +35,6 @@ namespace ClassController
             };
         }
 
-        /// <summary>
-        /// Adds the item.
-        /// </summary>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="qty">The qty.</param>
-        /// <exception cref="System.Exception">Inventario insuficiente.</exception>
         public void AddItem(int productId, decimal qty)
         {
             var p = _products.First(x => x.Id == productId);
@@ -84,12 +61,10 @@ namespace ClassController
             }
 
             inv.QuantityAvailable -= qty;
+            _context.InventoryItems.Update(inv);
+            _context.SaveChanges();
         }
 
-        /// <summary>
-        /// Removes the item.
-        /// </summary>
-        /// <param name="productId">The product identifier.</param>
         public void RemoveItem(int productId)
         {
             var item = _cart.Items.FirstOrDefault(x => x.ProductId == productId);
@@ -97,37 +72,30 @@ namespace ClassController
 
             var inv = _inventory.First(x => x.ProductId == productId);
             inv.QuantityAvailable += item.Quantity;
+            _context.InventoryItems.Update(inv);
+            _context.SaveChanges();
 
             _cart.Items.Remove(item);
         }
 
-        /// <summary>
-        /// Clears the cart.
-        /// </summary>
         public void ClearCart()
         {
             foreach (var i in _cart.Items)
             {
                 var inv = _inventory.First(x => x.ProductId == i.ProductId);
                 inv.QuantityAvailable += i.Quantity;
+                _context.InventoryItems.Update(inv);
             }
+            _context.SaveChanges();
 
             _cart.Items.Clear();
         }
 
-        /// <summary>
-        /// Sets the delivery address.
-        /// </summary>
-        /// <param name="addressId">The address identifier.</param>
         public void SetDeliveryAddress(int addressId)
         {
             _cart.DeliveryAddressId = addressId;
         }
 
-        /// <summary>
-        /// Checkouts this instance.
-        /// </summary>
-        /// <returns></returns>
         public List<ExpenseRecord> Checkout()
         {
             var list = new List<ExpenseRecord>();
@@ -136,9 +104,8 @@ namespace ClassController
             {
                 var p = _products.First(x => x.Id == item.ProductId);
 
-                list.Add(new ExpenseRecord
+                var record = new ExpenseRecord
                 {
-                    Id = _history.Count + list.Count + 1,
                     Username = _cart.Username,
                     FairId = _cart.FairId,
                     ProductId = item.ProductId,
@@ -146,10 +113,13 @@ namespace ClassController
                     Date = DateTime.Now,
                     Quantity = item.Quantity,
                     UnitPrice = item.UnitPrice
-                });
+                };
+
+                list.Add(record);
+                _context.ExpenseRecords.Add(record);
             }
 
-            _history.AddRange(list);
+            _context.SaveChanges();
             ClearCart();
             return list;
         }
