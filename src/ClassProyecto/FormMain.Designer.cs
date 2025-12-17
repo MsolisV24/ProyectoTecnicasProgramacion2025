@@ -68,7 +68,7 @@
             btnLoadData.Name = "btnLoadData";
             btnLoadData.Size = new Size(120, 30);
             btnLoadData.TabIndex = 9;
-            btnLoadData.Text = "Load CSV";
+            btnLoadData.Text = "Load Data";
             btnLoadData.Click += btnLoadData_Click;
             // 
             // btnSetUserFair

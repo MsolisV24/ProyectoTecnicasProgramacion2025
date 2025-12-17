@@ -136,7 +136,6 @@
             this.Name = "LoginView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.LoginView_Load);
             this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

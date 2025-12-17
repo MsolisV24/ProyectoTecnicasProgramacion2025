@@ -1,35 +1,21 @@
-﻿using ClassController.Abstractions;
+﻿using ClassController;
 using ClassModels;
+using ClassDataAccess;
 
 namespace ClassProyecto
 {
-    /// <summary>
-    /// manages the user registration view.
-    /// </summary>
-    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class RegisterView : Form
     {
+        private readonly UserHandler _userHandler;
+        private readonly DatabaseContext _context;
 
-        /// <summary>
-        /// The userhandler
-        /// </summary>
-        private readonly UserHandler Userhandler;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RegisterView"/> class.
-        /// </summary>
-        /// <param name="Userhandler">The userhandler.</param>
-        public RegisterView(UserHandler Userhandler)
+        public RegisterView(UserHandler userHandler)
         {
             InitializeComponent();
-            this.Userhandler = Userhandler;
+            _userHandler = userHandler;
+            _context = new DatabaseContext();
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnRegister control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnRegister_Click(object sender, EventArgs e)
         {
             var name = txtName.Text.Trim();
@@ -43,61 +29,31 @@ namespace ClassProyecto
                 return;
             }
 
-            if (Userhandler.Custumers.Any(x => x.Username.Equals(username, StringComparison.OrdinalIgnoreCase)))
+            if (_context.Customers.Any(c => c.Username == username))
             {
                 MessageBox.Show("The user already exists.");
                 return;
             }
 
-            var further = CreateUser(name, lastname, username, password);
-            Userhandler.Custumers.Add(further);
-            SaveUserRegister(further);
-
-            MessageBox.Show("Registered.");
-            Close();
-        }
-
-        /// <summary>
-        /// Creates the user.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="lastname">The lastname.</param>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
-        /// <returns></returns>
-        private Customer CreateUser(string name, string lastname, string username, string password)
-        {
-            return new Customer
+            var maxId = _context.Customers.Any() ? _context.Customers.Max(c => c.Id) : 0;
+            var customer = new Customer
             {
+                Id = maxId + 1,
                 Name = name,
                 LastName = lastname,
                 Username = username,
                 Password = password,
+                Directions = "[]"
             };
+
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+
+            _userHandler.Custumers.Add(customer);
+
+            MessageBox.Show("Registered.");
+            Close();
         }
-
-        /// <summary>
-        /// Saves the user register.
-        /// </summary>
-        /// <param name="add">The add.</param>
-        private void SaveUserRegister(Customer add)
-        {
-            var route = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "users.csv");
-            var line = $"{add.Name},{add.LastName},{add.Username},{add.Password},[]";
-            File.AppendAllLines(route, [line]);
-        }
-
-        private void RegisterView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Handles the Load event of the RegisterView control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-
     }
 }
 

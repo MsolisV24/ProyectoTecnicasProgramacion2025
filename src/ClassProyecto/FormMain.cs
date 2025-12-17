@@ -48,17 +48,8 @@ namespace ClassProyecto
         {
             try
             {
-                var basePath = AppDomain.CurrentDomain.BaseDirectory;
-
                 _market = new MarketController();
-                _market.LoadCsvFiles(
-                    Path.Combine(basePath, "users.csv"),
-                    Path.Combine(basePath, "producers.csv"),
-                    Path.Combine(basePath, "fairs.csv"),
-                    Path.Combine(basePath, "products.csv"),
-                    Path.Combine(basePath, "inventory.csv"),
-                    Path.Combine(basePath, "expenses.csv")
-                );
+                _market.LoadData();
 
                 _cart = _market.Cart();
                 _stats = _market.Statistics();
@@ -72,7 +63,7 @@ namespace ClassProyecto
 
                 _dataLoaded = true;
 
-                MessageBox.Show("Data loaded successfully.");
+                MessageBox.Show("Data loaded successfully from database.");
             }
             catch (Exception ex)
             {

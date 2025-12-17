@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{02EA681E-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassController.Test", "test\ClassController.Test\ClassController.Test.csproj", "{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassDataAcces", "src\ClassDataAcces\ClassDataAcces.csproj", "{8BDBFDA9-7D08-4F64-864B-67BD07E2A9BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BEE3582-F7F3-4D81-86EF-D111AFEC2C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BDBFDA9-7D08-4F64-864B-67BD07E2A9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BDBFDA9-7D08-4F64-864B-67BD07E2A9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BDBFDA9-7D08-4F64-864B-67BD07E2A9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BDBFDA9-7D08-4F64-864B-67BD07E2A9BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
