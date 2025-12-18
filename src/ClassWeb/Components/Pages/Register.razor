@@ -1,0 +1,56 @@
+﻿@page "/register"
+
+<h3>Register - Sistema Feria del Agricultor CR</h3>
+
+<div style="margin: 20px;">
+    <div style="margin-bottom: 10px;">
+        <label>Name:</label>
+        <input @bind="name" style="margin-left: 55px;" />
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <label>Lastname:</label>
+        <input @bind="lastName" style="margin-left: 33px;" />
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <label>Username:</label>
+        <input @bind="username" style="margin-left: 30px;" />
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <label>Password:</label>
+        <input type="password" @bind="password" style="margin-left: 36px;" />
+    </div>
+
+    <div>
+        <button @onclick="RegisterUser">Register</button>
+    </div>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <div style="margin-top: 10px;">@message</div>
+    }
+</div>
+
+@code {
+    private string name = "";
+    private string lastName = "";
+    private string username = "";
+    private string password = "";
+    private string message = "";
+
+    private void RegisterUser()
+    {
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName) ||
+            string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            message = "Complete todos los campos";
+            return;
+        }
+
+
+        message = "Usuario registrado exitosamente";
+
+    }
+}
