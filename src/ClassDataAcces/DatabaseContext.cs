@@ -1,12 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ClassModels;
-using Microsoft.EntityFrameworkCore;
-using ClassModels;
 
 namespace ClassDataAccess
 {
     public class DatabaseContext : DbContext
     {
+        public DatabaseContext()
+        {
+        }
+
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Producer> Producers { get; set; }
         public DbSet<Fair> Fairs { get; set; }
@@ -17,7 +24,10 @@ namespace ClassDataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=market.db");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source=market.db");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

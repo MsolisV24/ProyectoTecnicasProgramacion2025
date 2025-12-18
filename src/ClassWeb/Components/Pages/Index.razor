@@ -1,0 +1,47 @@
+﻿@page "/"
+
+<h3>Welcome to Sistema Feria del Agricultor CR</h3>
+
+<div style="margin: 20px;">
+    <div style="margin-bottom: 10px;">
+        <label>Username:</label>
+        <input @bind="username" style="margin-left: 10px;" />
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <label>Password:</label>
+        <input type="password" @bind="password" style="margin-left: 14px;" />
+    </div>
+
+    <div>
+        <button @onclick="Login" style="margin-right: 10px;">Login</button>
+        <button @onclick="GoToRegister">Register User</button>
+    </div>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div style="color: red; margin-top: 10px;">@errorMessage</div>
+    }
+</div>
+
+@code {
+    private string username = "";
+    private string password = "";
+    private string errorMessage = "";
+
+    private void Login()
+    {
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            errorMessage = "Complete todos los campos";
+            return;
+        }
+
+
+    }
+
+    private void GoToRegister()
+    {
+
+    }
+}
